@@ -540,6 +540,132 @@ client.on('group-participants-update', async (anu) => {
 	    }
 	})
 
+client.on('message-update', async (hurtz) => {
+	try {
+		const from = hurtz.key.remoteJid
+		const messageStubType = WA_MESSAGE_STUB_TYPES[hurtz.messageStubType] || 'MESSAGE'
+		const dataRevoke = JSON.parse(fs.readFileSync('./src/gc-revoked.json'))
+		const dataCtRevoke = JSON.parse(fs.readFileSync('./src/ct-revoked.json'))
+		const dataBanCtRevoke = JSON.parse(fs.readFileSync('./src/ct-revoked-banlist.json'))
+		const sender = hurtz.key.fromMe ? client.user.jid : hurtz.key.remoteJid.endsWith('@g.us') ? hurtz.participant : hurtz.key.remoteJid
+		const isRevoke = hurtz.key.remoteJid.endsWith('@s.whatsapp.net') ? true : hurtz.key.remoteJid.endsWith('@g.us') ? dataRevoke.includes(from) : false
+		const isCtRevoke = hurtz.key.remoteJid.endsWith('@g.us') ? true : dataCtRevoke.data ? true : false
+		const isBanCtRevoke = hurtz.key.remoteJid.endsWith('@g.us') ? true : !dataBanCtRevoke.includes(sender) ? true : false
+		if (messageStubType == 'REVOKE') {
+			console.log(`Status untuk grup : ${!isRevoke}\nStatus semua kontak : ${!isCtRevoke}\nStatus kontak dikecualikan : ${!isBanCtRevoke}`)
+			if (!isRevoke) return
+			if (!isCtRevoke) return
+			if (!isBanCtRevoke) return
+			const from = hurtz.key.remoteJid
+			const isGroup = hurtz.key.remoteJid.endsWith('@g.us') ? true : false
+			let int
+			let infoMSG = JSON.parse(fs.readFileSync('./src/.dat/msg.data.json'))
+			const id_deleted = hurtz.key.id
+			const conts = hurtz.key.fromMe ? client.user.jid : client.contacts[sender] || { notify: jid.replace(/@.+/, '') }
+			const pushname = hurtz.key.fromMe ? client.user.name : conts.notify || conts.vname || conts.name || '-'
+			const opt4tag = {
+				contextInfo: { mentionedJid: [sender] }
+			}
+			for (let i = 0; i < infoMSG.length; i++) {
+				if (infoMSG[i].key.id == id_deleted) {
+					const dataInfo = infoMSG[i]
+					const type = Object.keys(infoMSG[i].message)[0]
+					const timestamp = infoMSG[i].messageTimestamp
+					int = {
+						no: i,
+						type: type,
+						timestamp: timestamp,
+						data: dataInfo
+					}
+				}
+			}
+			const index = Number(int.no)
+			const body = int.type == 'conversation' ? infoMSG[index].message.conversation : int.type == 'extendedTextMessage' ? infoMSG[index].message.extendedTextMessage.text : int.type == 'imageMessage' ? infoMSG[index].message.imageMessage.caption : int.type == 'stickerMessage' ? 'Sticker' : int.type == 'audioMessage' ? 'Audio' : int.type == 'videoMessage' ? infoMSG[index].videoMessage.caption : infoMSG[index]
+			const mediaData = int.type === 'extendedTextMessage' ? JSON.parse(JSON.stringify(int.data).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : int.data
+			var itsme = `${numer}@s.whatsapp.net`
+				var split = `${cr}`
+				// var taged = mek.message.extendedTextMessage.contextInfo.mentionedJid[0]
+				var selepbot72 = {
+					contextInfo: {
+						participant: itsme,
+						quotedMessage: {
+							extendedTextMessage: {
+								text: split,
+							}
+						}
+					}
+				}
+			if (int.type == 'conversation' || int.type == 'extendedTextMessage') {
+				const strConversation = `「 *ANTI-DELETE* 」
+
+*Nama :* ${pushname} ( @${sender.replace('@s.whatsapp.net', '')} )
+*Tipe :* Text
+*Waktu :* ${moment.unix(int.timestamp).format('HH:mm:ss DD/MM/YYYY')}
+*Pesan :* ${body ? body : '-'}
+`
+				client.sendMessage(from, strConversation, MessageType.text, selepbot72)
+			} else if (int.type == 'stickerMessage') {
+				var itsme = `${numer}@s.whatsapp.net`
+					var split = `${cr}`
+					const pingbro23 = {
+						contextInfo: {
+							participant: itsme,
+							quotedMessage: {
+								extendedTextMessage: {
+									text: split,
+								}
+							}
+						}
+					}
+				const filename = `${sender.replace('@s.whatsapp.net', '')}-${moment().unix()}`
+				const savedFilename = await client.downloadAndSaveMediaMessage(int.data, `./media/sticker/${filename}`);
+				const strConversation = `「 *ANTI-DELETE* 」
+
+Nama :* ${pushname} ( @${sender.replace('@s.whatsapp.net', '')} )
+Tipe :* Sticker
+Waktu :* ${moment.unix(int.timestamp).format('HH:mm:ss DD/MM/YYYY')}
+`
+
+				const buff = fs.readFileSync(savedFilename)
+				client.sendMessage(from, strConversation, MessageType.text, opt4tag)
+				client.sendMessage(from, buff, MessageType.sticker, pingbro23)
+				// console.log(stdout)
+				fs.unlinkSync(savedFilename)
+
+			} else if (int.type == 'imageMessage') {
+				var itsme = `${numer}@s.whatsapp.net`
+					var split = `${cr}`
+					const pingbro22 = {
+						contextInfo: {
+							participant: itsme,
+							quotedMessage: {
+								extendedTextMessage: {
+									text: split,
+								}
+							}
+						}
+					}
+				const filename = `${sender.replace('@s.whatsapp.net', '')}-${moment().unix()}`
+				const savedFilename = await client.downloadAndSaveMediaMessage(int.data, `./media/revoke/${filename}`);
+				const buff = fs.readFileSync(savedFilename)
+				const strConversation = `「 *ANTI-DELETE* 」
+
+*Nama :* ${pushname} ( @${sender.replace('@s.whatsapp.net', '')} )
+*Tipe :* Image
+*Waktu :* ${moment.unix(int.timestamp).format('HH:mm:ss DD/MM/YYYY')}
+*Pesan :* ${body ? body : '-'}\`\`\`
+`
+				client.sendMessage(from, buff, MessageType.image, { contextInfo: { mentionedJid: [sender] }, caption: strConversation })
+				fs.unlinkSync(savedFilename)
+			}
+		}
+	} catch (e) {
+		console.log('Message : %s', color(e, 'green'))
+		// console.log(e)
+	}
+})
+
+
 	client.on('message-new', async (mek) => {
 		try {
 			if (!mek.message) return
@@ -565,6 +691,7 @@ client.on('group-participants-update', async (anu) => {
 			const isGroup = from.endsWith('@g.us')
 			const q = args.join(' ')
 			const botNumber = client.user.jid
+			const totalchat = await client.chats.all()
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
 			pushname = client.contacts[sender] != undefined ? client.contacts[sender].vname || client.contacts[sender].notify : undefined
 			const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
@@ -1056,7 +1183,30 @@ client.on('group-participants-update', async (anu) => {
 					totl = `*Total Suara Bot:* ${suara.length}\n`
 					res = totl + added + teks + added
 					client.sendMessage(from, res, text)
-					break					
+					break		
+					
+case 'chatlist':
+case 'cekchat':
+	client.updatePresence(from, Presence.composing)
+	var itsme = `${numer}@s.whatsapp.net`
+	var split = `*𝘾𝙀𝙆 𝘼𝙇𝙇-𝘾𝙃𝘼𝙏*`
+	var selepbot = {
+		contextInfo: {
+		participant: itsme,
+		quotedMessage: {
+		extendedTextMessage: {
+		text: split,
+					}
+				}
+			}
+		}
+	//teks = 'This is list of chat number :\n'
+	// for (let all of totalchat) {
+	//teks += `~> @${totalchat}\n`
+	//}
+	teks = `Total : ${totalchat.length}`
+	client.sendMessage(from, teks, text, selepbot)
+	break
 					
 								
 				case 'dompet':
@@ -2451,6 +2601,7 @@ case 'galaxytext':
 					mentions(teks, members_id, true)
 					client.groupRemove(from, members_id)
 					break 
+					
 					case 'setreply':
 					if (!isOwner) return reply(ind.ownerb())
                     			client.updatePresence(from, Presence.composing) 
@@ -2459,6 +2610,7 @@ case 'galaxytext':
 					reply(`reply berhasil di ubah menjadi : ${cr}`)
 					await limitAdd(sender)
 					break 
+					
 					case 'grouplist':
 					if (!isRegistered) return reply(ind.noregis())
 					client.updatePresence(from, Presence.composing) 
