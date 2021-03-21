@@ -98,6 +98,8 @@ NOTE : WA yang di pakai scan code = jadi BOT
   | TTP | 😢👎 |
   | Kunci Text | 😢👎 |
   
+  <p align="right">
+  
   ## FUN MENU
   | FUN MENU | STATUS |
   |------------|--------|
@@ -134,6 +136,8 @@ NOTE : WA yang di pakai scan code = jadi BOT
   | Speed | 😎👍 |
   | Tampar | 😢👎 |
   
+  </p>
+  
   ## MEDIA MENU
   | MEDIA MENU | STATUS |
   |------------|--------|
@@ -160,6 +164,8 @@ NOTE : WA yang di pakai scan code = jadi BOT
   | wait | 😎👍 |
   | img2url | 😎👍 |
   
+  <p align="center>
+  
   ## DUNIA WIBU
   | DUNIA WIBU | STATUS |
   |------------|--------|
@@ -183,6 +189,8 @@ NOTE : WA yang di pakai scan code = jadi BOT
   | animekiss | 😎👍 |
   | kusonime | 😎👍 |
   
+  </p>
+  
   ## CHARACHTER ANIME
   | CHARACTER | STATUS |
   |------------|--------|
@@ -196,6 +204,8 @@ NOTE : WA yang di pakai scan code = jadi BOT
   | miku | 😎👍 |
   | megumin | 😎👍 |
   
+  <p align="right">
+  
   ## LIMIT MENU
   | LIMIT | STATUS |
   |------------|--------|
@@ -205,6 +215,7 @@ NOTE : WA yang di pakai scan code = jadi BOT
   | transfer | 😎👍 |
   | Profile | 😎👍 |
   
+  </p>
   
   ##THANKS YANG UDAH LIHAT PROJECT INI
  
