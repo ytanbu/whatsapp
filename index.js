@@ -2046,10 +2046,13 @@ case 'galaxytext':
 					tek = body.slice(9);
 					serc = await fetchJson(`https://onlydevcity.herokuapp.com/api/pixabay?q=${tek}&apikey=${devcityapi}`, {method: 'get'})
 					reply(ind.wait)
-					data = JSON.parse(JSON.stringify(serc.result.hits));
-					rand = data[Math.floor(Math.random() * data.length)];
-					pict = await getBuffer(rand)
-					client.sendMessage(from, pict, image, {quoted: mek, caption: `*PIXABAY*\n\n_*KeyWord :*_ ${serc}`});
+					res = view = JSON.parse(JSON.stringify(serc.result.hits))
+					pix = res[Math.floor(Math.random() * res.length)]
+					has = await getBuffer(pix.webformatURL)
+					for (let i of pix) {
+						teks = `*PIXABAY*\n\n*KeyWord*: ${i.tags}\n*Uploader*: ${i.user}\n*Views*: &{i.views}\n*Like*: ${i.likes}\n*Comments*: ${i.comments}\n*Downloads*: ${i.downlaods}`
+					}
+					client.sendMessage(from, has, image, {quoted: mek, caption: teks})
 					await limitAdd(sender)
 					break
 					
@@ -3795,14 +3798,14 @@ break
 				case 'ts':
 				if (!isRegistered) return reply(ind.noregis())
 				if (isLimit(sender)) return reply(ind.limitend(pushname))
-				    if (args.length < 1) return client.sendMessage(from, 'Kode Bahasanya???', text, {quoted: mek})
-				    if (args.length < 2) return client.sendMessage(from, 'Text Yg Mau Di translate??', text, {quoted: mek})
+				    if (args.length < 1) return reply('Text Yg Mau Di translate??')
+				    if (args.length < 2) return reply(`Contoh penggunaan\n${prefix}halo dunia / id / en\n\nid = kode bahasa indonesia\nen = kode bahasa inggris\nuntuk lebih jelasnya ketik ${prefix}bahasa`)
 				    ts = body.slice(11)
-				    kode = ts.split("/")[0]
-				    teks = ts.split("/")[1]
-				    anu = await fetchJson(`https://api.arugaz.my.id/api/edu/translate?lang=${kode}&text=${teks}`)
-				    reply(ind.wait)
-				    translate = `Text Asli: *${body.slice(11)}*\n\nHasil: *${anu.text}*`
+				    teks = ts.split("/")[0]
+				    asli = ts.split("/")[1]
+				    ke = ts.split("/")[2]
+				    anu = await fetchJson(`http://docs-jojo.herokuapp.com/api/translate?text=${teks}&from=${asli}&to=${ke}`)
+				    translate = `Text Asli: *${asli}*\n\nHasil: *${anu.translated_text}*`
 				    client.sendMessage(from, translate, text, {quoted: mek})
 				   await limitAdd(sender)
 				   break 
@@ -4167,11 +4170,7 @@ break
                         if (!isBotGroupAdmins) return reply(ind.badmin())
 					client.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 					break
-					case 'leave': 
-				if (!isGroup) return reply(ind.groupo())
-				if (!isOwner) return reply(ind.ownerb())
-				await reply(from, 'bye').then(() => client.groupLeave(from))
-					break 
+					
 				case 'bc': 
 					if (!isOwner) return reply(ind.ownerb()) 
 					if (args.length < 1) return reply('.......')
@@ -4456,7 +4455,7 @@ break
 					if (!isRegistered) return reply(ind.noregis())
 					if (isLimit(sender)) return reply(ind.limitend(pusname))
 					teks = body.slice(6)
-					anu = await fetchJson(`https://tobz-api.herokuapp.com/api/simsimi?text=${teks}&apikey=${TobzKey}`)
+					anu = await fetchJson(`https://api.zeks.xyz/api/simi?apikey=${zeksapi}&text=${teks}`)
 					simii = `${anu.result}`
 					client.sendMessage(from, simii, text, {quoted: mek})
 					await limitAdd(sender)
