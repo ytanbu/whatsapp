@@ -872,6 +872,10 @@ Waktu :* ${moment.unix(int.timestamp).format('HH:mm:ss DD/MM/YYYY')}
 		if (budy.includes('oyasumi')) {
 		reply('oyasuminasai')
 		}
+			
+		if (budy.includes('Cekprefix'))	{
+		reply(`WiBot saat ini memakai prefix ${prefix}`)
+		}
 
 			
 
@@ -982,7 +986,7 @@ Waktu :* ${moment.unix(int.timestamp).format('HH:mm:ss DD/MM/YYYY')}
 			if (authorname != undefined) { } else { authorname = groupName }	
 			
 			function addMetadata(packname, author) {	
-				if (!packname) packname = 'Botol LoL'; if (!author) author = 'Bot';	
+				if (!packname) packname = 'WoBot'; if (!author) author = 'WiBot';	
 				author = author.replace(/[^a-zA-Z0-9]/g, '');	
 				let name = `${author}_${packname}`
 				if (fs.existsSync(`./src/stickers/${name}.exif`)) return `./src/stickers/${name}.exif`
@@ -1103,7 +1107,7 @@ Waktu :* ${moment.unix(int.timestamp).format('HH:mm:ss DD/MM/YYYY')}
 					} 
 					const suitxp = Math.ceil(Math.random() * 5000);
 					addLevelingXp(sender, suitxp)
-					teks = '*HASIL PERTANDINGAN*\n\n*Kamu Memilih :* ' + player + '\n*Dan _Botol LoL_ Memilih :* ' + bot + '\n\n*HASIL =* ' + resu + '\n\n Kamu mendapatkan *_EXP_* sebesar = ' + suitxp;
+					teks = '*HASIL PERTANDINGAN*\n\n*Kamu Memilih :* ' + player + '\n*Dan _WiBot_ Memilih :* ' + bot + '\n\n*HASIL =* ' + resu + '\n\n Kamu mendapatkan *_EXP_* sebesar = ' + suitxp;
 					client.sendMessage(from, teks, text, {quoted: mek})
 					await limitAdd(sender)
 					break
@@ -2139,6 +2143,17 @@ case 'galaxytext':
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Nih nekonime mu >_<'})
 					await limitAdd(sender)
 					break
+					
+				case 'neko2':
+				if (!isRegistered) return reply(ind.noregis())
+               			if (isLimit(sender)) return reply(ind.limitend(pusname))
+					res = await fetcJson(`https://onlydevcity.herokuapp.com/api/nsfw/neko2?apikey=${devcityapi}`, {method: 'get'})
+					reply(ind.wait())
+					bufer = await getBuffer(res.result.neko)
+					client.sendMessage(from, bufer, image, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "★彡[Bot͢͢͢oℓ]彡 *•* MiKako★ ", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('storage/image/takagi.jpeg')}}}, caption: 'nyaaa~'})
+					await limitAdd(sender)
+					break
+					
 				case 'ranime':
 				if (!isRegistered) return reply(ind.noregis())
 				if (isLimit(sender)) return reply(ind.limitend(pusname))
@@ -2848,7 +2863,7 @@ case 'galaxytext':
                     		if (isLimit(sender)) return reply(ind.limitend(pusname))
 					const slap =['anjing','babi lu','anak anjing','udah tolol nub Lagi','muka lo kek monyet','udah jomblo sendirian lagi dirumah tolol','so so an mau punya pacar muka aja kek monyet lepass dari kandang','ganteng doang di toxic aja dibilang baperan','pantek kau','bangsat kau','ku entod kalian nangis kau','memek lu semua','lihat anak anjing lagi baca','ngentot lu ya?','ganteng doang jemput cewe dipanggang','kamu cantik beb bullshit anjing cowo buaya','anak dajjal','puki lu','anjing ngajak gelud?','sama hantu takut cupu ngentod','cupu cupu aja gausah bacot','kontol lu semua','bocah lu semua kontol','3 Hari Lagi','Ngontol Amat']
 					const ple = slap[Math.floor(Math.random() * slap.length)]
-					pod = await getBuffer(`https://media.giphy.com/media/S8507sBJm1598XnsgD/source.gif`)
+					pod = fs.readFileSync('./storage/chika.gif')
 					client.sendMessage(from, pod, image, { quoted: mek, caption: '*Toxic*\n\n'+ ple })
 					await limitAdd(sender)
 					break
@@ -3239,6 +3254,7 @@ dftr = `
 ╠☞ ~${prefix}loli2~
 ╠☞ *${prefix}shota*
 ╠☞ *${prefix}neko*
+╠☞ *${prefix}neko2*
 ╠☞ ~${prefix}nekopoi~
 ╠☞ *${prefix}nekonime*
 ╠☞ *${prefix}ranime*
@@ -4125,7 +4141,7 @@ break
 					case 'leave': 
 					if (!isGroup) return reply(ind.groupo())
 					if (!isOwner) return reply(ind.ownerb())
-					await client.sendMessage(from, buffer, image, {caption: 'nice to meet you all. But i would leave from this group.\n*sayonara~*\n\n*cheers:* Botol LoL ^w^'}).then (() => client.groupLeave(from))
+					await client.sendMessage(from, buffer, image, {caption: 'nice to meet you all. But i would leave from this group.\n*sayonara~*\n\n*cheers:* WiBot ^w^'}).then (() => client.groupLeave(from))
 					break 
 					
 					case 'totaluser':
