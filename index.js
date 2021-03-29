@@ -44,7 +44,6 @@ const imgbb = require('imgbb-uploader')
 const kagApi = require('@kagchi/kag-api')
 const lolis = require('lolis.life')
 const loli = new lolis()
-const doujinshi = require('nhentai-api')
 const speed = require('performance-now')
 const ms = require('parse-ms')
 const toMs = require('ms')
@@ -60,11 +59,11 @@ const devcityapi = 'ntahlahkun'
 const TechApi = 'B8r68c-6gwmq1-af4vtS-if1zgD-jni01B'
 const vcard = 'BEGIN:VCARD\n'  // Jangan di ubah biar ga error
             + 'VERSION:3.0\n'  // Jangan di ubah biar ga error
-            + 'FN:Fico Shop\n'  // Ganti jadi namamu
+            + 'FN:Yt Anbu\n'  // Ganti jadi namamu
             + 'ORG: Pengembang Fico Shop;\n'  // Ganti jadi namamu/Botmu
             + 'TEL;type=CELL;type=VOICE;waid=6285864236900:+62 858-6423-6900\n'  // Ganti jadi nomormu, tapi jangan ubah polanya
             + 'END:VCARD' // jangan di ubah
-prefix = '.'
+prefix = '#'
 blocked = []   
 limitawal = '100' //terserah ganti/gk
 cr = '*Dhlah Males✅*'
@@ -73,7 +72,7 @@ ghoibsu = 'tes'
 myteks = 'okeh nyala'
 
 /******** OWNER NUMBER**********/
-const ownerNumber = ["6285864236900@s.whatsapp.net","6285864236900@s.whatsapp.net"]  //ganti menjadi nomormu
+const ownerNumber = ["6282281338522@s.whatsapp.net","6282281338522@s.whatsapp.net"]  //ganti menjadi nomormu
 /************************************/
 
        
@@ -3114,243 +3113,7 @@ teks = `${kyun(runtime)}`
 //result = fs.readFileSync('sticker/iky.ekif')
 var itsme = `${numer}@s.whatsapp.net`
 var split = `${cr}`
-// var taged = mek.message.extendedTextMessage.contextInfo.mentionedJid[0]
-const bruhhhh = {
-	contextInfo: {
-		participant: itsme,
-			quotedMessage: {
-				extendedTextMessage: {
-					text: split,
-						}
-					}
-				}
-			}
-
-dftr = `
-╭══─⊱ ❰ *ABOUT USER* ❱ ⊰─══
-╠☞ *Nama* : ${pushname}
-╠☞ *Nomer* : wa.me/${sender.split("@")[0]}
-╠☞ *Uang mu* : Rp${uangku}
-╠☞ *XP* : ${getLevelingXp(sender)}/${reqXp}
-╠☞ *Level* : ${getLevelingLevel(sender)}
-╠☞ *User register* : ${_registered.length}
-╰════─⊱  ⸨ *Taufik - Kun* ⸩  ⊰─════╯
-
-           Rules - Simple
-▬▭▬▭▬▭▬▭▬▭▬▭▬
-●⧐ *Spam : Auto Block!*
-●⧐ *telpon/chat bot block*
-●⧐ *Beri Jeda 5detik Saat Menggunakannya!!*
-●⧐ *Bug/Error Harap Cht Owner!*
-●⧐ *Harap Sabar Dengan Bug²nya!*
-●⧐ *Gunakan Bot Sebaik-baiknya!*
-▬▭▬▭▬▭▬▭▬▭▬▭▬
-⚠️ *_Donasi lah_* ⚠️
-*${prefix}donasi*
-*${prefix}owner*
-*${prefix}ingfo*
-*${prefix}bot*
-*${prefix}profile*
-*${prefix}bahasa*
-
-*-=[Bot Bukan Untuk Orang Baperan]=-*
-╭══─⊱ ❰ *MAKER MENU* ❱ ⊰─══➤
-╠☞ *${prefix}sticker* (jika video max. 9det)
-╠☞ *${prefix}stickerhide* 
-╠☞ *${prefix}silktext* [text]
-╠☞ *${prefix}glitch* [text/text]
-╠☞ *${prefix}coffe* [text]
-╠☞ *${prefix}coffe2* [text]
-╠☞ *${prefix}attp* [text]
-╠☞ *${prefix}galaxytext* [text]
-╠☞ *${prefix}textsky* [text]
-╠☞ *${prefix}phlogo* [text / text]
-╠☞ *${prefix}ytcomment* [text / text]
-╠☞ *${prefix}pubg* [text / text]
-╠☞ *${prefix}makequote* [text | watermark]
-╠☞ *${prefix}hartatahta* [text]
-╠☞ *${prefix}*lovemsg* [text]
-╠☞ *${prefix}smoke* [text]
-╠☞ *${prefix}logoepep* [text]
-╠☞ *${prefix}wolflogo* [text / text]
-╠☞ *${prefix}logogaming* [text]
-╠☞ *${prefix}nulis* [nama / kelas / text]
-╠☞ *${prefix}toimg*
-╠☞ *${prefix}trigger*
-╠☞ *${prefix}wasted*
-╠☞ *${prefix}wanted* [nama / text]
-╠☞ *${prefix}nightbeach*
-╠☞ *${prefix}kalender*
-╠☞ *${prefix}ocr*
-╠☞ ~${prefix}ttp~
-╠☞ ~${prefix}kuncitext~
-║
-╠══─⊱ ❰ *FUN MENU* ❱ ⊰─════➤
-╠☞ *${prefix}jankenpom* [pilihanmu]
-╠☞ *${prefix}mancing* 
-╠☞ *${prefix}mutual*
-╠☞ *${prefix}next*
-╠☞ *${prefix}mining* 
-╠☞ *${prefix}bisakah* [question]
-╠☞ *${prefix}kapankah* [question]
-╠☞ *${prefix}apakah* [question]
-╠☞ *${prefix}seberapagay* [nama]
-╠☞ *${prefix}rate* [question]
-╠☞ *${prefix}truth*
-╠☞ *${prefix}dare*
-╠☞ *${prefix}tebalik* [text]
-╠☞ *${prefix}say* [text]
-╠☞ *${prefix}hobby* [nama]
-╠☞ *${prefix}watak* [nama]
-╠☞ *${prefix}fitnah* [tag & text & balasan}
-╠☞ *${prefix}ntahlah*
-╠☞ *${prefix}slap*
-╠☞ *${prefix}babi*
-╠☞ *${prefix}cekganteng*
-╠☞ *${prefix}cekcantik*
-╠☞ *${prefix}katailham*
-╠☞ *${prefix}caklontong*
-╠☞ *${prefix}family100*
-╠☞ *${prefix}tebakin*
-╠☞ *${prefix}faktaunik*
-╠☞ *${prefix}kbbi* [text]
-╠☞ *${prefix}artinama* [nama]
-╠☞ *${prefix}memeindo*
-╠☞ *${prefix}moddroid* [judul]
-╠☞ *${prefix}happymof* [judul]
-╠☞ *${prefix}ping*
-╠☞ *~${prefix}tampar~ (Error)*
-║
-╠══─⊱ ❰ *MEDIA MENU* ❱ ⊰─═══➤
-╠☞ *${prefix}beritahoax*
-╠☞ *${prefix}brainly* [question]
-╠☞ *${prefix}wiki* [question]
-╠☞ *${prefix}jadwalsholat* [tempat]
-╠☞ *${prefix}kisahnabi* [nama]
-╠☞ *${prefix}quran*
-╠☞ *${prefix}pantun*
-╠☞ *${prefix}pinterest* [judul]
-╠☞ *${prefix}wpmuntainview*
-╠☞ *${prefix}tts*
-║    contoh : #tts id MiKako yang tampan
-╠☞ *${prefix}play* [judul]
-╠☞ *${prefix}lirik* [judul]
-╠☞ *${prefix}chord* [judul]
-╠☞ *${prefix}tomp3*
-╠☞ *${prefix}ytmp3* [link]
-╠☞ *${prefix}yutubdl* [link]
-╠☞ *${prefix}ssweb* [link]
-╠☞ *${prefix}qrcode* [link]
-╠☞ *${prefix}map* [tempat]
-╠☞ *${prefix}stalkig* [username]
-╠☞ *${prefix}qrcode* [link]
-╠☞ *${prefix}randomkpop*
-╠☞ *${prefix}wait*
-╠☞ *${prefix}img2url*
-║    
-╠══─⊱ ❰ *DUNIA WIBU* ❱ ⊰─═══➤
-╠☞ *${prefix}wibu*
-╠☞ *${prefix}husbu*
-╠☞ *${prefix}waifu*
-╠☞ *${prefix}couple*
-╠☞ *${prefix}loli*
-╠☞ ~${prefix}loli2~
-╠☞ *${prefix}shota*
-╠☞ *${prefix}neko*
-╠☞ *${prefix}neko2*
-╠☞ ~${prefix}nekopoi~
-╠☞ *${prefix}nekonime*
-╠☞ *${prefix}ranime*
-╠☞ *${prefix}anime*
-╠☞ *${prefix}randomhentong*
-╠☞ *${prefix}baka*
-╠☞ *${prefix}nangis
-╠☞ *${prefix}blowjob*
-╠☞ *${prefix}nsfwloli*
-╠☞ *${prefix}nsfwneko*
-╠☞ *${prefix}hentai*
-╠☞ *${prefix}yuri*
-╠☞ *${prefix}animekiss*
-╠☞ *${prefix}kusonime* [judul]
-║    
-║───────⟪  CHARACTER ANIME ⟫───────
-║  
-╠☞ *${prefix}naruto*
-╠☞ *${prefix}boruto*
-╠☞ *${prefix}sasuke*
-╠☞ *${prefix}hinata*
-╠☞ *${prefix}sakura*
-╠☞ *${prefix}minato*
-╠☞ *${prefix}kurumi*
-╠☞ *${prefix}miku*
-╠☞ *${prefix}megumin*
-╠☞ *${prefix}shinobu*
-║ 
-╠══─⊱ ❰ *LIMIT MENU* ❱ ⊰─═══➤
-╠☞ *${prefix}limit*
-╠☞ *${prefix}buylimit* [jumlah]
-╠☞ *${prefix}dompet*
-╠☞ *${prefix}transfer* [nomor | jumlah]
-╠☞ *${prefix}jualikan* [jumlah]
-╠☞ *${prefix}ikanku*
-║
-╠══─⊱ ❰ *NSFW MENU* ❱ ⊰─═══➤
-╠☞ *${prefix}pokemon*
-╠☞ *${prefix}anjing*
-║
-╠══─⊱ ❰ *GROUP MENU* ❱ ⊰─══➤
-╠☞ *${prefix}hidetag*
-╠☞ *${prefix}grouplist*
-╠☞ *${prefix}level*
-╠☞ *${prefix}leaderboard*
-╠☞ *${prefix}linkgc*
-╠☞ *${prefix}tagall*
-╠☞ *${prefix}delete*
-╠☞ *${prefix}setpp*
-╠☞ *${prefix}add* [nomor]
-╠☞ *${prefix}kick* [tag]
-╠☞ *${prefix}setname* [nama]
-╠☞ *${prefix}setdesc* [text]
-╠☞ *${prefix}demote* [tag]
-╠☞ *${prefix}promote* [tag]
-╠☞ *${prefix}listadmin*
-╠☞ *${prefix}lstbadword*
-╠☞ *${prefix}addbadword* [text]
-╠☞ *${prefix}delbadword* [text]
-╠☞ *${prefix}antibadword* [on/off]
-╠☞ *${prefix}antilink* [1/0]
-╠☞ *${prefix}group* [buka/tutup]
-╠☞ *${prefix}leveling* [enable/disable]
-╠☞ *${prefix}nsfw* [1/0]
-╠☞ *${prefix}welcome* [1/0]
-║
-╠══─⊱ ❰ *OWNER MENU* ❱ ⊰─══➤
-╠☞ *${prefix}bc* [text]
-╠☞ *${prefix}bcgc* [text]
-╠☞ *${prefix}kickall* Mau Ngapain Tod? >:
-╠☞ *${prefix}setreply*
-╠☞ *${prefix}setprefix*
-╠☞ *${prefix}clearall*
-╠☞ *${prefix}resetlimit*
-╠☞ *${prefix}block* [nomor]
-╠☞ *${prefix}unblock* [nomor]
-╠☞ *${prefix}listblock*
-╠☞ *${prefix}totaluser*
-╠☞ *${prefix}leave*
-╠☞ *${prefix}event* [1/0]
-╠☞ *${prefix}clone* [tag]
-╠☞ *${prefix}setppbot*
-
-╠══─⊱ ❰ *THANGKS TO* ❱ ⊰─══➤
-║
-╠☞ *Botol - LoL*
-╠☞ *Reyna*
-╠☞ *Damar*
-╠☞ *Yuno*
-╠☞ *★Taufik - Kun★*
-╰════─⊱  ⸨ *MiKako⚔️* ⸩  ⊰─════╯
-`
-client.sendMessage(from, buffer, image, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "★彡[Bot͢͢͢oℓ]彡 *•* MiKako★ ", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync('storage/image/takagi.jpeg')}}}, caption: `${dftr}`})
+// var taged = mek.message.extendedTextMessage.contextInfo.mentionedJid[0
 break
 //client.sendMessage(from, buffer, image, {quoted: mek, caption: dftr})
 //await costum(ind.menu(pushname, prefix, getLevelingLevel, getLevelingXp, sender, reqXp, _registered, uangku), text, tescuk, cr)
